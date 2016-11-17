@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <!-- include the BotDetect layout stylesheet -->
+   <link href="{{ captcha_layout_stylesheet_url() }}" type="text/css" rel="stylesheet">
+
 
     <!-- Scripts -->
     <script>

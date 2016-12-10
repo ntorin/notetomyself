@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/test', 'TestController@index');
 
-Route::post('/saveUserData', 'TestController@saveUserData');
+Route::post('/saveUserData', 'HomeController@saveUserData');

@@ -22,6 +22,12 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script>
+        function openInNew(textbox){
+            window.open(textbox.value);
+            this.blur();
+        }
+    </script>
 </head>
 <body>
     <div id="app">

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {{Form::open(array('id' => 'dashboard', 'action' => 'TestController@saveUserData', 'method' => 'post', ))}}
+    {{Form::open(array('id' => 'dashboard', 'action' => 'HomeController@saveUserData', 'method' => 'post', ))}}
     <div class="row">
         <div class="col-xs-12">
             <div class="col-xs-3">
@@ -12,7 +12,7 @@
             <div class="col-xs-3">
                 <h2>Websites</h2>
                 <h3>click to open</h3>
-                {{ App\Website::getUserWebsites(Auth::user()->id, Auth::user()->email) }}
+                {{ App\Website::getUserWebsites(Auth::user()->id) }}
                 <input type="text" name="websites[]">
                 <br/>
             </div>
@@ -20,7 +20,7 @@
                 <h2>Images</h2>
                 <h3>click for full size</h3>
                 {{Form::file('file')}}
-                {{ App\Image::getUserImages(Auth::user()->id) }}
+                {{ App\Image::getUserImages(Auth::user()->id, Auth::user()->email) }}
             </div>
             <div class="col-xs-3">
                 <h2>TBD</h2>

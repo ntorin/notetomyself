@@ -8,6 +8,7 @@ class Website extends Model
 {
     protected $table = 'websites';
     protected $guarded = [];
+    public $timestamps = false;
 
     public static function getUserWebsites($userid)
     {

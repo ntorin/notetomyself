@@ -8,6 +8,7 @@ class Image extends Model
 {
     protected $table = 'images';
     protected $guarded = [];
+    public $timestamps = false;
 
     public static function getUserImages($userid, $username)
     {

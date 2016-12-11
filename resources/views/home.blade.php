@@ -7,7 +7,7 @@
         <div class="col-xs-12">
             <div class="col-xs-3">
                 <h2>Notes</h2>
-                <textarea name="notes" form="dashboard"></textarea>
+                <textarea name="notes" form="dashboard">{{Auth::user()->notes}}</textarea>
             </div>
             <div class="col-xs-3">
                 <h2>Websites</h2>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-xs-3">
                 <h2>TBD</h2>
-                <textarea name="tbd" form="dashboard"></textarea>
+                <textarea name="tbd" form="dashboard">{{Auth::user()->tbd}}</textarea>
 
             </div>
         </div>

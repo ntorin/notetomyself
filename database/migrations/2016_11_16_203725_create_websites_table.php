@@ -15,7 +15,7 @@ class CreateWebsitesTable extends Migration
     {
         Schema::create('websites', function(Blueprint $table){
             $table->increments('id');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

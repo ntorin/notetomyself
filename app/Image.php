@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Collective\Html\FormFacade;
 
 class Image extends Model
 {
@@ -10,18 +11,19 @@ class Image extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public static function getUserImages($userid, $username)
+    public static function getUserImages($userid)
     {
-        $images = Image::where('user_id', '=', $userid)->get();
+        $images = Images::where('user_id', $userid);
+        //$images = Images::where('user_id', '=', $userid)->get();
         foreach ($images as $image) {
-            $basename = basename($image->url);
+            $basename = $image->thumbin;
 
-            echo '
-               <a href="' . $image->url . '" target="_blank">
-                    <img src="' . asset('images/') . $username . "/" . $basename . '" alt="' . $basename .'"/>
-                </a>';
-            echo Form::checkbox('delete[]', $image->id);
-            echo Form::label('delete[]', 'delete');
+            echo '<a href="/getfullimg/' . $image->id. '">
+            <img src="data:image/' . $image->filetype . ';base64,' . $image->thumbin .'">
+            </a>
+            ';
+            echo FormFacade::checkbox('delete[]', $image->id);
+            echo FormFacade::label('delete[]', 'delete');
             echo "<br/>";
         }
     }

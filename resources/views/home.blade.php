@@ -20,7 +20,7 @@
                 <h2>Images</h2>
                 <h3>click for full size</h3>
                 {{Form::file('file')}}
-                {{ App\Image::getUserImages(Auth::user()->id, Auth::user()->email) }}
+                {{ App\Image::getUserImages(Auth::user()->id) }}
             </div>
             <div class="col-xs-3">
                 <h2>TBD</h2>

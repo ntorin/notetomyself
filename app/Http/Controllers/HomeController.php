@@ -47,7 +47,7 @@ class HomeController extends Controller
             $i++;
         }
 
-        $deletes = $request->input('deletes');
+        $deletes = $request->input('delete');
         Image::destroy($deletes);
 
 
@@ -91,8 +91,8 @@ class HomeController extends Controller
             imagecopyresampled($thumb, $original, 0, 0, 0, 0, 150, 150, imagesx($original), imagesy($original));
             imagejpeg($thumb, __DIR__ . '/tmp.' . $imageFileType, 100);
 
-            Images::create([
-                'user_id' => 0,
+            Image::create([
+                'user_id' => $request->input('userid'),
                 'filetype' => $imageFileType,
                 'fullbin' => base64_encode(file_get_contents($_FILES['file']['tmp_name'])),
                 'thumbin' => base64_encode(file_get_contents(__DIR__ . '/tmp.' . $imageFileType)),
@@ -106,7 +106,7 @@ class HomeController extends Controller
     }
 
     public function getFullImage(Request $request, $imgid){
-        $img = Images::where('id', $imgid)->get()->first();
+        $img = Image::where('id', $imgid)->get()->first();
 
         echo '
             <img src="data:image/' . $img->filetype . ';base64,' . $img->fullbin .'">';

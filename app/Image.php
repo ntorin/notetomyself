@@ -13,10 +13,9 @@ class Image extends Model
 
     public static function getUserImages($userid)
     {
-        $images = Images::where('user_id', $userid);
+        $images = Image::where('user_id', $userid)->get();
         //$images = Images::where('user_id', '=', $userid)->get();
         foreach ($images as $image) {
-            $basename = $image->thumbin;
 
             echo '<a href="/getfullimg/' . $image->id. '">
             <img src="data:image/' . $image->filetype . ';base64,' . $image->thumbin .'">

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {{Form::open(array('id' => 'dashboard', 'action' => 'HomeController@saveUserData', 'method' => 'post', ))}}
+    {{Form::open(array('id' => 'dashboard', 'action' => 'HomeController@saveUserData', 'method' => 'post', 'files' => true,))}}
     <div class="row">
         <div class="col-xs-12">
             <div class="col-xs-3">

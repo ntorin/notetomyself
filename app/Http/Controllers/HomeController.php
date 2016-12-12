@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Website;
 use App\Image;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -40,7 +41,7 @@ class HomeController extends Controller
 
         $this->confirmDirExists($target_dir);
 
-        $websites = $request->input('websites[]');
+        $websites = $request->input('websites');
         $storedsites = Website::where('user_id', $request->input('userid'))->get();
 
         $i = 0;
@@ -50,7 +51,7 @@ class HomeController extends Controller
             $i++;
         }
 
-        $deletes = $request->input('deletes[]');
+        $deletes = $request->input('deletes');
         Image::destroy($deletes);
 
 
@@ -61,7 +62,7 @@ class HomeController extends Controller
             ]);
         }
 
-        $img = $request->input('file');
+        /*$img = $request->input('file');
 
         $imageFileType = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
@@ -73,9 +74,9 @@ class HomeController extends Controller
             $target_file = $target_dir . "/" . time() . $name . "." . $imageFileType;
             move_uploaded_file($_FILES['file']['tmp_name'], ($target_file));
             createThumbnail($target_file);
-        }
+        }*/
 
-        return Redirect::to('/test');
+        return Redirect::to('/home');
     }
 
     private function createThumbnail($img){

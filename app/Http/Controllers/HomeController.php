@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Website;
-use App\Image;
+use App\Images;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class HomeController extends Controller
 {
@@ -51,12 +52,12 @@ class HomeController extends Controller
         }
 
         $deletes = $request->input('deletes[]');
-        Image::destroy($deletes);
+        Images::destroy($deletes);
 
 
-        if(!strcmp(trim($websites[$i]), "")){
+        if(!strcmp(trim($websites[$i - 1]), "")){
             Website::create([
-                'url' => $websites[$i],
+                'url' => $websites[$i - 1],
                 'user_id' => $request->input('userid'),
             ]);
         }
@@ -65,7 +66,7 @@ class HomeController extends Controller
 
         $imageFileType = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-        $imgcount = Image::where('id', $request->input('userid'))->take(10)->get()->count();
+        $imgcount = Images::where('id', $request->input('userid'))->take(10)->get()->count();
 
         //uploads file if correct type
         if ($imgcount <= 4 && ($imageFileType == "jpg" || $imageFileType == "gif")) {
@@ -113,6 +114,13 @@ class HomeController extends Controller
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
+    }
+
+    public function getFullImage(Request $request, $imgid){
+        $img = Images::where('id', $imgid)->get()->first();
+
+        echo '
+            <img src="data:image/' . $img->filetype . ';base64,' . $img->fullbin .'">';
     }
 
 }

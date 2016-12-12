@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::to('/login');
 });
 
 Auth::routes();
@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/test', 'TestController@index');
 
-Route::post('/saveUserData', 'HomeController@saveUserData');
+Route::post('/saveUserData', 'TestController@saveUserData');
+Route::any('/getfullimg/{imgid}', 'HomeController@getFullImage');
